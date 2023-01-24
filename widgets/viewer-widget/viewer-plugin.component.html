@@ -1,0 +1,49 @@
+<div style="margin-left: 15px; margin-right: 15px;">
+    <div class="d-flex j-c-between" style="margin-bottom: 20px;">
+        <div style="margin-right: 20px;">
+            <!-- SHOW TICKETS IN TABLE -->
+            <table class="table table-striped c8y-table-responsive" style="margin-bottom: 20px; ">
+                <thead>
+                    <tr>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.ticketId">Ticket id</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.subject">Subject</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.description">Description</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.creationDate">Creation date</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.lastUpdateDate">Last update date</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.status">Status</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.priority">Priority</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.owner">Owner</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.alarmId">Alarm id</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.deviceId">Device id</th>
+                        <th *ngIf="config.customwidgetdata.table.showColumns.comments" >Comments</th>
+                    </tr>
+                </thead>
+                <tbody>                
+                    <tr *ngFor="let t of paginatedTickets;">
+                        <td data-label="Ticket id" *ngIf="config.customwidgetdata.table.showColumns.ticketId"><a target="_blank" href="{{tpConfig?.ticketRecordTemplateUrl | ReplaceTicketId : t.id}}">{{t.id}}</a></td>
+                        <td data-label="Subject" *ngIf="config.customwidgetdata.table.showColumns.subject">{{t.subject}}</td>
+                        <td data-label="Description" *ngIf="config.customwidgetdata.table.showColumns.description">{{t.description}}</td>
+                        <td data-label="Creation date" *ngIf="config.customwidgetdata.table.showColumns.creationDate">{{t.creationDate | date: 'dd MMM yyyy, HH:mm:ss'}}</td>
+                        <td data-label="Last update date" *ngIf="config.customwidgetdata.table.showColumns.lastUpdateDate">{{t.lastUpdateDate | date: 'dd MMM yyyy, HH:mm:ss'}}</td>
+                        <td data-label="Status" *ngIf="config.customwidgetdata.table.showColumns.status">{{t.status}}</td>
+                        <td data-label="Status" *ngIf="config.customwidgetdata.table.showColumns.priority">{{t.priority}}</td>
+                        <td data-label="Status" *ngIf="config.customwidgetdata.table.showColumns.owner">{{t.owner}}</td>
+                        <td data-label="Alarm id" *ngIf="config.customwidgetdata.table.showColumns.alarmId">{{t.alarmId}}</td>
+                        <td data-label="Device id" *ngIf="config.customwidgetdata.table.showColumns.deviceId"><a class="device-link" (click)="redirectToDevicePage(t.deviceId)">{{t.deviceId}}</a></td>
+                        <td data-label="Comments" *ngIf="config.customwidgetdata.table.showColumns.comments"><button class="btn btn-default" (click)="showTicketComments(t)">View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination [totalItems]="tickets.length" previousText=" "   
+            nextText=" " [itemsPerPage]="totalTicketsPerPage" (pageChanged)="ticketsPageChanged($event)"></pagination>
+        </div>
+        <div>
+
+        </div>
+        <div>
+            <button type="button" class="btn btn-clean btn-icon p-0" title="Refresh tickets" (click)="refreshTickets()">
+                <span class="dlt-c8y-icon-refresh"></span>
+            </button>
+        </div>
+    </div>
+</div>

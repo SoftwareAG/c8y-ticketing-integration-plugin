@@ -1,0 +1,162 @@
+<div class="row">
+    <div class="col-lg-4">  
+        <div class="form-group">
+            <label>Platform</label>
+            <select class="form-control" [(ngModel)]="tpConfig.name" required >
+                <option value="AGILEAPPS">webMethods AgileApps</option>
+                <option value="EXTERNAL_REST">External REST APIs</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="form-group">
+            <label>Tenant url</label>
+            <input type="text" class="form-control" [(ngModel)]="tpConfig.tenantUrl" required />
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" [(ngModel)]="tpConfig.username" required />
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" [(ngModel)]="tpConfig.password" required />
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label>Ticket record template url</label>
+            <input type="text" class="form-control" [(ngModel)]="tpConfig.ticketRecordTemplateUrl" placeholder="https://tenantname/tickets/{id}/record" required />
+        </div>
+    </div>
+    <ng-container *ngIf="tpConfig.name === 'AGILEAPPS'">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Account id</label>
+                <input type="text" class="form-control" [(ngModel)]="tpConfig.accountId" required />
+            </div>
+        </div>
+    </ng-container>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="c8y-checkbox">
+                <input type="checkbox" [(ngModel)]="tpConfig.alarmSubscription" />
+                <span></span>
+                <span>Create tickets automatically on device alarm mapping matched</span>
+            </label>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="form-group">
+            <label class="c8y-checkbox">
+                <input type="checkbox" [(ngModel)]="tpConfig.autoAcknowledgeAlarm" />
+                <span></span>
+                <span>Change alarm status to ACKNOWLEDGE automatically after creating ticket</span>
+            </label>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <button class="btn btn-primary" [disabled]="!isTPConfigValid()" (click)="saveTPConfig()">Save configuration</button>
+        <ng-container *ngIf="tpConfig.name !== 'AGILEAPPS'">
+            <a class="btn btn-emphasis" target="_blank" href="https://github.com/SoftwareAG/c8y-ticketing-integration-microservice/releases/download/v1.0.1/apis-swagger.yaml">Download Swagger</a>
+        </ng-container>
+    </div>
+</div>     
+<ng-container *ngIf="tpConfigSaved && tpConfig.alarmSubscription">
+    <div class="row">
+        <div class="col-lg-12">
+            <fieldset>
+                <div class="legend form-block left">
+                    Device Alarm Mappings
+                </div>
+                <div class="row" *ngFor="let daMapping of daMappings; let i=index">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Device id</label>
+                            <input type="text" class="form-control" [(ngModel)]="daMapping.deviceId" required />
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="form-group">
+                            <label>Alarm type</label>
+                            <input type="text" class="form-control" [(ngModel)]="daMapping.alarmType" required />
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <button class="btn btn-clean btn-icon" style="margin-top: 28px; font-size: 20px;" (click)="removeDAMapping(i)">
+                            <i class="c8y-icon c8y-icon-waste-bin"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button class="btn btn-default" (click)="addDAMapping()">Add mapping</button>
+                        <button class="btn btn-primary" (click)="saveDAMappings()">Save mappings</button>
+                    </div>
+                </div>       
+            </fieldset>
+        </div>
+    </div>
+</ng-container>
+<div class="row">
+    <div class="col-lg-12">
+        <fieldset>
+            <div class="legend form-block left">
+                Customization
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Maximum total tickets</label>
+                        <input type="number" class="form-control" [(ngModel)]="widgetConfig.maxTickets" (change)="updateConfig()" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Tickets page size</label>
+                        <input type="number" class="form-control" [(ngModel)]="widgetConfig.ticketsPageSize" (change)="updateConfig()" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Mappings page size</label>
+                        <input type="number" class="form-control" [(ngModel)]="widgetConfig.daMappingsPageSize" (change)="updateConfig()" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.showComments" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Show comments</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2" *ngFor="let chartColor of widgetConfig.chartColors; let i=index; trackBy: trackByFn">
+                    <div class="form-group">
+                        <label>Chart color #{{i+1}}</label>
+                        <input type="color" class="form-control" [(ngModel)]="widgetConfig.chartColors[i]" (change)="updateConfig()"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button class="btn btn-default" (click)="addChartColor()">Add color</button>
+                    <button class="btn btn-default" (click)="removeChartColor()" [disabled]="widgetConfig.chartColors.length === 1">Remove color</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>

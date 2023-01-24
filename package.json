@@ -1,0 +1,98 @@
+{
+  "name": "c8y-ticketing-integration-plugin",
+  "version": "1016.0.84",
+  "description": "To configure Ticketing Integration microservice, create tickets and view tickets.",
+  "scripts": {
+    "start": "c8ycli server --env.beta=true -u https://appbuilder-next.latest.stage.c8y.io/ --shell cockpit-1016",
+    "build": "c8ycli build --env.mode=production",
+    "deploy": "c8ycli deploy",
+    "postinstall": "ngcc",
+    "prebuild": "gulp clean",
+    "postbuild": "gulp bundle"
+  },
+  "keywords": [],
+  "author": "Kalpshekhar Gupta",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@angular/animations": "14.0.6",
+    "@angular/cdk": "14.1.2",
+    "@angular/common": "14.0.6",
+    "@angular/compiler": "14.0.6",
+    "@angular/core": "14.0.6",
+    "@angular/forms": "14.0.6",
+    "@angular/platform-browser": "14.0.6",
+    "@angular/platform-browser-dynamic": "14.0.6",
+    "@angular/router": "14.0.6",
+    "@angular/upgrade": "14.0.6",
+    "@c8y/client": "1016.0.84",
+    "@c8y/ngx-components": "1016.0.84",
+    "@c8y/style": "1016.0.84",
+    "@ngx-translate/core": "14.0.0",
+    "ngx-bootstrap": "9.0.0",
+    "rxjs": "6.6.3",
+    "zone.js": "0.11.7",
+    "@c8y/ng1-modules": "1016.0.84",
+    "chart.js": "2.9.4",
+    "ng2-charts": "2.4.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "14.0.6",
+    "@angular/compiler-cli": "14.0.6",
+    "@angular/language-service": "14.0.6",
+    "@angular/localize": "14.0.6",
+    "@angular/service-worker": "14.0.6",
+    "@c8y/cli": "1016.0.84",
+    "@types/jest": "28.1.6",
+    "jest": "28.1.3",
+    "jest-preset-angular": "12.2.0",
+    "typescript": "4.7.4",
+    "gulp": "4.0.2",
+    "gulp-zip": "5.0.1",
+    "del": "6.1.1"
+  },
+  "c8y": {
+    "application": {
+      "name": "Ticketing Integration Plugin",
+      "description": "To configure Ticketing Integration microservice, create tickets and view tickets.",
+      "contextPath": "c8y-ticketing-integration-plugin",
+      "key": "c8y-ticketing-integration-plugin-application-key",
+      "globalTitle": "Ticketing Integration Plugin",
+      "tabsHorizontal": true,
+      "isPackage": true,
+      "noAppSwitcher": true,
+      "package": "plugin",
+      "requiredPlatformVersion": ">=1016.0.0",
+      "exports": [
+        {
+          "name": "Ticketing Integration Setup Plugin",
+          "module": "TicketingIntegrationSetupPluginModule",
+          "path": "./widgets/setup-widget/setup-plugin.module.ts",
+          "description": "To configure Cumulocity IoT Ticketing Integration microservice and view tickets."
+        },
+        {
+          "name": "Ticketing Integration Viewer Plugin",
+          "module": "TicketingIntegrationViewerPluginModule",
+          "path": "./widgets/viewer-widget/viewer-plugin.module.ts",
+          "description": "To view tickets from ticketing platform using Ticketing Integration microservice."
+        },
+        {
+          "name": "Ticketing Integration Alarms Plugin",
+          "module": "TicketingIntegrationAlarmsPluginModule",
+          "path": "./widgets/alarms-widget/alarms-plugin.module.ts",
+          "description": "Shows active alarms related to a device and and allows to create tickets using Ticketing Integration microservice."
+        }
+      ],
+      "remotes": {
+        "widget-plugin": [
+          "TicketingIntegrationSetupPluginModule",
+          "TicketingIntegrationViewerPluginModule",
+          "TicketingIntegrationAlarmsPluginModule"
+        ]
+      }
+    },
+    "cli": {}
+  },
+  "browserslist": [
+    "last 2 major versions"
+  ]
+}

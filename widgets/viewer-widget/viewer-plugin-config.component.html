@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-lg-12">
+        <fieldset>
+            <div class="legend form-block left">
+                Table customization
+            </div>
+            <label>Show columns</label>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.ticketId" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Ticket id</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.subject" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Subject</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.description" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Description</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.creationDate" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Creation date</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.lastUpdateDate" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Last update date</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.status" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Status</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.priority" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Priority</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.owner" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Owner</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.alarmId" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Alarm id</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.deviceId" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Device id</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="c8y-checkbox">
+                            <input type="checkbox" [(ngModel)]="widgetConfig.table.showColumns.comments" (change)="updateConfig()" />
+                            <span></span>
+                            <span>Comments</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Maximum total tickets</label>
+                        <input type="number" class="form-control" required [(ngModel)]="widgetConfig.maxTickets" min="1" max="2000" (change)="updateConfig()" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Page size</label>
+                        <input type="number" class="form-control" required [(ngModel)]="widgetConfig.table.pageSize" min="1" (change)="updateConfig()" />
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header" style="color: black;">
+            <h3>
+              <span>Create ticket</span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Comments (optional)</label>
+                <textarea class="form-control" [(ngModel)]="comments" rows="4" cols="50"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" translate="" (click)="dismiss()">
+                Close
+            </button>
+            <button class="btn btn-primary" translate="" (click)="createTicket()">
+                Create
+            </button>
+        </div>
+    </div>
+</div>

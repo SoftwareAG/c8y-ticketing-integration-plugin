@@ -1,0 +1,17 @@
+.device-link:hover {
+    cursor: pointer;
+}
+
+
+.dark .btn-primary {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .btn-default {
+    border-color: rgb(23, 118, 191);
+    color: rgb(23, 118, 191);
+}
+
+.branded .btn-primary {
+    background-color: rgb(23, 118, 191);;
+}

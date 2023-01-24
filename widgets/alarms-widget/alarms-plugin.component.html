@@ -1,0 +1,87 @@
+<div class="text-muted" *ngIf="alarms.length === 0">
+  <div class="c8y-empty-state text-left">
+    <h1 class="c8y-icon c8y-icon-alert-idle c8y-icon-duocolor"></h1>
+    <p><strong translate="">No alarms to display.</strong></p>
+  </div>
+</div>
+<div style="margin-left: 15px; margin-right: 15px;">
+  <div class="list-group-item flex-row collapsible" *ngFor="let alarm of alarms; let i = index">
+
+    <div class="list-item-actions">
+      <!-- toggle collapse -->
+      <button type="button" title="Expand" class="collapse-btn" (click)="collapsedArray[i] = !collapsedArray[i]" [attr.aria-expanded]="collapsedArray[i]" [attr.aria-controls]="alarm.id">
+        <i *ngIf="collapsedArray[i]" c8y-icon="chevron-down" class="dlt-c8y-icon-chevron-down"></i>
+        <i *ngIf="!collapsedArray[i]" c8y-icon="chevron-up" class="dlt-c8y-icon-chevron-up"></i>
+      </button>
+    </div>
+
+    <!-- status -->
+    <div class="list-item-icon">
+      <!-- icon severity-->
+      <i c8y-icon="warning" class="status dlt-c8y-icon-warning critical" title="CRITICAL" *ngIf="alarm.severity === 'CRITICAL'"></i>
+      <i c8y-icon="circle" class="status dlt-c8y-icon-circle warning" title="WARNING" *ngIf="alarm.severity === 'WARNING'"></i>
+      <i c8y-icon="exclamation-circle" class="status dlt-c8y-icon-exclamation-circle minor" title="MINOR" *ngIf="alarm.severity === 'MINOR'"></i>
+      <i c8y-icon="exclamation-circle" class="status dlt-c8y-icon-exclamation-circle major" title="MAJOR" *ngIf="alarm.severity === 'MAJOR'"></i>
+      <br>
+      <!-- icon alarm -->
+      <i c8y-icon="bell" class="dlt-c8y-icon-bell" title="ACTIVE" *ngIf="alarm.status === 'ACTIVE'"></i>
+    </div>
+
+    <div class="list-item-body">
+      <!-- Alarm description -->
+      <span>{{alarm.text}}</span>
+      <p class="m-t-4">
+        <!-- Date -->
+        <small class="text-muted icon-flex" title="Last occurrence of this alarm (device time).">
+          <i c8y-icon="clock-o" class="dlt-c8y-icon-clock-o"></i>{{alarm.time | date : 'dd MMM yyyy, HH:mm:ss'}}
+        </small>
+        &nbsp;
+        <!-- device -->
+        <br class="visible-xs">
+        <a class="text-muted" title="Go to device" href="/apps/devicemanagement/index.html#/device/{{config.device.id}}/device-info">
+          <small class="icon-flex">
+            <i c8y-icon="exchange" class="dlt-c8y-icon-exchange"></i>{{alarm.source.name}}
+          </small>
+        </a>
+        <!-- ticket -->
+        <ng-container *ngIf="ticketsMap.get(alarm.id)">
+          &nbsp;
+          <br class="visible-xs">
+          <a class="text-muted" title="View ticket" target="_blank" href="{{tpConfig?.ticketRecordTemplateUrl | ReplaceTicketId : ticketsMap.get(alarm.id).id}}">
+            <small class="icon-flex">
+              <i c8y-icon="ticket" class="dlt-c8y-icon-ticket"></i>{{ticketsMap.get(alarm.id).id}}
+            </small>
+          </a>
+        </ng-container>
+        <span class="pull-right showOnHover">
+          <button type="button" title="Acknowledge" class="btn btn-warning btn-xs" style="margin-left: 8px;" (click)="acknowledgeAlarm(alarm)">
+            <i c8y-icon="bell-slash" class="dlt-c8y-icon-bell-slash"></i>
+          </button>
+          <button type="button" title="Clear" class="btn btn-success btn-xs" style="margin-left: 8px;" (click)="clearAlarm(alarm)">
+            <i c8y-icon="check-circle" class="dlt-c8y-icon-check-circle"></i>
+          </button>
+          <ng-container *ngIf="!ticketsMap.get(alarm.id)">
+            <button type="button" title="Create ticket" class="btn btn-primary btn-xs" style="margin-left: 8px;" (click)="createTicket(alarm.id)">
+              <i c8y-icon="ticket" class="dlt-c8y-icon-ticket"></i>
+            </button>
+          </ng-container>
+        </span>
+      </p>
+    </div>
+    <div id="{{alarm.id}}" [collapse]="collapsedArray[i]" [isAnimated]="true">
+      <div class="legend form-block">
+        STATUS
+      </div>
+      <div>
+        <dl class="dl-inline small text-muted m-t-4">
+          <dt>Type</dt>
+          <dd>{{alarm.type}}</dd>
+        </dl>
+        <dl class="dl-inline small text-muted m-t-4">
+          <dt>Alarm id</dt>
+          <dd>{{alarm.id}}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
