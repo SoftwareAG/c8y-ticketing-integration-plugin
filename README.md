@@ -2,12 +2,12 @@
 
 This plugin consists of three widgets that allows to configure Ticketing Integration microservice, create tickets and view tickets.
 
-This plugin is supported for Cumulocity IoT version 1016.x.x onwards and Application Builder 2.0.0 onwards.
+This plugin is supported for Cumulocity IoT UI version >= 1016.x.x and Application Builder version >= 2.0.0.
 
 ## Ticketing Integration Setup widget
 This widget allows to configure the Ticketing Integration microservice, list the tickets and draw related charts for analysis.
 
-![Preview](widgets/setup-widget/assets/img-preview.png)
+![Preview](https://raw.githubusercontent.com/SoftwareAG/c8y-ticketing-integration-plugin/master/widgets/setup-widget/assets/img-preview.png)
 
 ### Configuration - to add the widget on dashboard
 1. Make sure you have successfully installed the plugin.
@@ -39,7 +39,7 @@ This widget allows to configure the Ticketing Integration microservice, list the
 ## Ticketing Integration Viewer widget
 This widget allows to view tickets from the configured Ticketing Platform using Ticketing Integration microservice.
 
-![Preview](widgets/viewer-widget/assets/img-preview.png)
+![Preview](https://raw.githubusercontent.com/SoftwareAG/c8y-ticketing-integration-plugin/master/widgets/viewer-widget/assets/img-preview.png)
 
 ### Configuration - to add the widget on dashboard
 1. Make sure you have successfully installed the plugin.
@@ -56,9 +56,11 @@ This widget allows to view tickets from the configured Ticketing Platform using 
 ## Ticketing Integration Alarms widget
 This widget shows active alarms related to a device and allows to create tickets using the Ticketing Integration microservice.
 
+![Preview](https://raw.githubusercontent.com/SoftwareAG/c8y-ticketing-integration-plugin/master/widgets/alarms-widget/assets/img-preview.png)
+
 ### Configuration - to add the widget on dashboard
-1. Make sure you have successfully installed the widget.
-2. Click on `Add widget`.
+1. Make sure you have successfully installed the plugin.
+2. Go to an application's dashbord and click on `Add widget`.
 3. Choose `Ticket Integration Alarms` widget.
 4. `Title` is the title of widget. Provide a relevant name. You may choose to hide this. Go to `Appearance` tab and choose `Hidden` under `Widget header style`.
 5. Choose a device using `Target assets or devices` for which you want to see the active alarms. It shows maximum 50 alarms at the moment.
@@ -83,10 +85,11 @@ This widget shows active alarms related to a device and allows to create tickets
 5. Open the URL in the logs to view and test your changes.
 6. (Optional) push the changes back to this repository.
 
-## Build - to create a new build for the Runtime Widget Loader
+## Build - to create a package to be installed
 1. Finish the development and testing on your local machine.
-2. Run `gulp` to start the build process. Run `npm install -g gulp` to install gulp if not already.
-3. Use `c8y-ticketing-integration-alarms-widget-{version}.zip` file in the `dist` folder as a distribution.
+2. Run `npm install -g gulp` to install gulp if not already.
+3. Run `npm run build` to start the build process.
+3. Use `c8y-ticketing-integration-plugin-{version}.zip` file in the `dist` folder as a distribution.
 
 ------------------------------
 
