@@ -1,6 +1,6 @@
 {
   "name": "c8y-ticketing-integration-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "To configure Ticketing Integration microservice, create tickets and view tickets.",
   "scripts": {
     "start": "c8ycli server --env.beta=true -u https://appbuilder-next.latest.stage.c8y.io/ --shell cockpit-1016",
