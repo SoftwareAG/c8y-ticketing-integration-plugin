@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mr-spacing">
     <div class="col-lg-4">  
         <div class="form-group">
             <label>Platform</label>
@@ -60,7 +60,7 @@
     </div>
 
 </div>
-<div class="row">
+<div class="row mr-spacing">
     <div class="col-lg-12">
         <button class="btn btn-primary" [disabled]="!isTPConfigValid()" (click)="saveTPConfig()">Save configuration</button>
         <ng-container *ngIf="tpConfig.name !== 'AGILEAPPS'">
@@ -69,7 +69,7 @@
     </div>
 </div>     
 <ng-container *ngIf="tpConfigSaved && tpConfig.alarmSubscription">
-    <div class="row">
+    <div class="row mr-spacing">
         <div class="col-lg-12">
             <fieldset>
                 <div class="legend form-block left">
@@ -104,7 +104,7 @@
         </div>
     </div>
 </ng-container>
-<div class="row">
+<div class="row mr-spacing">
     <div class="col-lg-12">
         <fieldset>
             <div class="legend form-block left">

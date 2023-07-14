@@ -1,3 +1,16 @@
 .device-link:hover {
     cursor: pointer;
 }
+::ng-deep .pagination>li:first-child>a, .pagination>li:first-child>span {
+    border-bottom-left-radius: calc(var(--c8y-form-control-height-base)*.5);
+    border-top-left-radius: calc(var(--c8y-form-control-height-base)*.5);
+    margin-left: 0;
+    text-indent: 0;
+	min-height: 31px !important;
+}
+::ng-deep .pagination>li:last-child>a, .pagination>li:last-child>span {
+    border-bottom-right-radius: calc(var(--c8y-form-control-height-base)*.5);
+    border-top-right-radius: calc(var(--c8y-form-control-height-base)*.5);
+    text-indent: 0;
+	min-height: 31px !important;
+}
