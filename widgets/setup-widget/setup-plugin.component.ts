@@ -20,8 +20,8 @@
  */
 
 import { Component, Input, OnInit } from '@angular/core';
-import { IApplication, IFetchResponse, IResultList, IFetchOptions } from '@c8y/client';
-import { AlertService } from '@c8y/ngx-components';
+import { IApplication, IFetchResponse, IResultList, IFetchOptions, UserService } from '@c8y/client';
+import { AlertService, AppStateService } from '@c8y/ngx-components';
 import { FetchClient, ApplicationService } from '@c8y/ngx-components/api';
 import * as _ from 'lodash';
 import { DAMapping } from './da-mapping';
@@ -90,12 +90,16 @@ export class SetupPluginComponent implements OnInit {
     public microserviceHealth: MicroserviceHealth = {
         status: "Checking..."
     };
-
+    userHasAdminRights: boolean;
     constructor(
         private fetchClient: FetchClient,
         private alertService: AlertService,
         private modalService: BsModalService, 
-        private appService: ApplicationService) {
+        private appService: ApplicationService,
+        private appStateService: AppStateService,
+        private userService: UserService) {
+
+        this.userHasAdminRights = userService.hasRole(appStateService.currentUser.value, "ROLE_APPLICATION_MANAGEMENT_ADMIN")
     }
 
     ngOnInit(): void {
@@ -135,7 +139,9 @@ export class SetupPluginComponent implements OnInit {
                 this.chartColors = this.config.customwidgetdata.chartColors;
                 this.maxTickets = this.config.customwidgetdata.maxTickets;
             }
-            this.getApplication();
+            if(this.userHasAdminRights) {
+                this.getApplication();
+            }
             this.getMicroserviceHealth();
             this.initialiseTPConfig();
         } catch(err) {
